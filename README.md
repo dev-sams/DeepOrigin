@@ -13,7 +13,7 @@ Run npm run cypress:open to open the Cypress Test Runner.
 Click on the test file product-api.spec.ts to run the tests.
 Test File:
 
-The test file product-api.spec.ts contains the actual test cases written using Cypress. Each test case is designed to validate a specific functionality of the product API.
+The test file product-api.cy.ts contains the actual test cases written using Cypress. Each test case is designed to validate a specific functionality of the product API.
 
 Test Environment:
 

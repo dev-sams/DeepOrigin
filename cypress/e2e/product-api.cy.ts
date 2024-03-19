@@ -53,6 +53,42 @@ describe('Product API Tests', () => {
     });
   });
 
+  it('should delete an existing product', () => {
+    cy.request({
+      method: 'DELETE',
+      url: `https://dummyjson.com/api/products/${productId}`,
+    }).then((response) => {
+      expect(response.status).to.equal(204);
+    });
+  });
+
+  it('should handle invalid product ID gracefully', () => {
+    const invalidProductId = 'invalid_id';
+
+    cy.request({
+      method: 'GET',
+      url: `https://dummyjson.com/api/products/${invalidProductId}`,
+      failOnStatusCode: false, // Prevent Cypress from failing the test on non-200 responses
+    }).then((response) => {
+      expect(response.status).to.equal(404);
+    });
+  });
+
+  it('should handle missing required fields when creating a new product', () => {
+    const newProduct = {
+      // Missing required fields
+    };
+
+    cy.request({
+      method: 'POST',
+      url: 'https://dummyjson.com/api/products',
+      body: newProduct,
+      failOnStatusCode: false, // Prevent Cypress from failing the test on non-2xx responses
+    }).then((response) => {
+      expect(response.status).to.equal(400);
+    });
+  });
+
   after(() => {
     // Clean up by deleting the test product
     cy.request({
